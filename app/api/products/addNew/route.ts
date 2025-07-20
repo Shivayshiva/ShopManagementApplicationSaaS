@@ -53,8 +53,8 @@ export async function PATCH(request: NextRequest) {
     await product.save();
 
     try {
-        const domain = process.env.NEXT_PUBLIC_DOMAIN || 'http://localhost';
-        const port = process.env.NEXT_PUBLIC_PORT || '3000';
+        const domain = process.env.NEXT_PUBLIC_DOMAIN ;
+        const port = process.env.NEXT_PUBLIC_PORT;
         const productUrl = `${domain}:${port}/product/${product._id}`;
         const qrDataUrl = await QRCode.toDataURL(productUrl);
   
