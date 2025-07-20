@@ -5,8 +5,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Providers from "@/lib/Providers";
 import ReactQueryProvider from "./providers/ReactQueryProvider";
   import { TooltipProvider } from "@/components/ui/tooltip";
-import SplashScreen from "@/components/SplashScreen";
-import { useEffect, useState } from "react";
 
 
 export const metadata: Metadata = {
@@ -25,13 +23,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -43,22 +34,18 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Shop Manager" />
       </head>
       <body>
-        {loading ? (
-          <SplashScreen />
-        ) : (
-          <ReactQueryProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <TooltipProvider>
-                <Providers>{children}</Providers>
-              </TooltipProvider>
-            </ThemeProvider>
-          </ReactQueryProvider>
-        )}
+        <ReactQueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>
+              <Providers>{children}</Providers>
+            </TooltipProvider>
+          </ThemeProvider>
+        </ReactQueryProvider>
         {/* <header style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1rem', borderBottom: '1px solid #eee' }}>
           <img src="/FavIcon.png" alt="Logo" style={{ height: '40px', width: '40px', objectFit: 'contain' }} />
           <span style={{ fontSize: '1.5rem', fontWeight: 700 }}>Vaishno Vastra Vibhag</span>
