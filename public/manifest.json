@@ -1,0 +1,27 @@
+{
+  "name": "Shop Management System",
+  "short_name": "ShopManager",
+  "description": "Complete shop management application with analytics, inventory, and billing",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "shopping"],
+  "lang": "en",
+  "dir": "ltr"
+}
