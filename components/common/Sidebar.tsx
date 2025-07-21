@@ -1,86 +1,82 @@
-import { BarChart3, FileText, Package, Receipt, Settings, Store, TrendingDown, Users, X, TestTube, PersonStanding } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import React, { useState } from 'react'
-import { Button } from '../ui/button';
+import React from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import { BarChart3, Package, Store, Receipt, Users, TrendingDown, PersonStanding, LogOut } from 'lucide-react';
+import GlobalButton from '@/components/common/globalButton';
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarTrigger,
+  SidebarFooter,
+  useSidebar,
+} from '@/components/ui/sidebar';
 
-// Add prop types for Sidebar
-interface SidebarProps {
-  sidebarOpen: boolean;
-  handleSidebarOpen: (open: boolean) => void;
-}
+const navigation = [
+  { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
+  { name: 'Products', href: '/dashboard/products', icon: Package },
+  { name: 'Shop Display', href: '/dashboard/shop', icon: Store },
+  { name: 'Billing', href: '/dashboard/billing', icon: Receipt },
+  { name: 'Customers', href: '/dashboard/customers', icon: Users },
+  { name: 'Expenses', href: '/dashboard/expenses', icon: TrendingDown },
+  { name: 'Staff', href: '/dashboard/staff-managment', icon: PersonStanding },
+];
 
-const Sidebar = ({ sidebarOpen, handleSidebarOpen }: SidebarProps) => {
-    const pathname = usePathname();
+const SidebarComponent = () => {
+  const pathname = usePathname();
+  const { isMobile, state, openMobile } = useSidebar();
 
-    const navigation = [
-        { name: "Dashboard", href: "/dashboard", icon: BarChart3 },
-        { name: "Products", href: "/dashboard/products", icon: Package },
-        { name: "Shop Display", href: "/dashboard/shop", icon: Store },
-        { name: "Billing", href: "/dashboard/billing", icon: Receipt },
-        { name: "Customers", href: "/dashboard/customers", icon: Users },
-        { name: "Expenses", href: "/dashboard/expenses", icon: TrendingDown },
-        // { name: "Reports", href: "/dashboard/reports", icon: FileText },
-        // { name: "Settings", href: "/dashboard/settings", icon: Settings },
-        { name: "Staff", href: "/dashboard/staff-managment", icon: PersonStanding },
-      ];
-  return(
-    <>
-    {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-          onClick={() => handleSidebarOpen(false)}
-        />
-      )}
+  const showText = isMobile ? openMobile : state === "expanded";
 
-      {/* Sidebar */}
-      <div
-        className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 bg-card border-r transform transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        )}
-      >
-        <div className="flex items-center justify-between h-16 px-6 border-b">
-          <div className="flex items-center space-x-2">
-            <Store className="h-8 w-8 text-primary" />
-            {/* <span className="text-xl font-bold">Vaishno Vastralaya</span> */}
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => handleSidebarOpen(false)}
-          >
-            <X className="h-5 w-5" />
-          </Button>
+  const handleLogout = () => {
+    signOut({ callbackUrl: '/auth/login' });
+  };
+
+  return (
+      <Sidebar className="flex flex-col h-screen justify-between overflow-hidden mr-5" collapsible="icon">
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <SidebarHeader>
+            <div className="flex items-center space-x-2 p-2">
+              <Store className="h-8 w-8 text-primary" />
+              {showText && (
+                <span className="font-bold text-lg">Shop Management</span>
+              )}
+            </div>
+          </SidebarHeader>
+          <SidebarContent className="overflow-y-auto ">
+            <SidebarMenu className="pr-5">
+              {navigation.map((item) => (
+                <SidebarMenuItem key={item.name} className="pl-5 pr-10 py-2">
+                  <Link href={item.href} passHref legacyBehavior>
+                    <SidebarMenuButton asChild isActive={pathname === item.href}>
+                      <a className="flex items-center gap-3">
+                        <item.icon className="h-5 w-5" />
+                        {showText && (
+                          <span>{item.name}</span>
+                        )}
+                      </a>
+                    </SidebarMenuButton>
+                  </Link>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarContent>
         </div>
+        <SidebarFooter className="border-t border-sidebar-border px-2 py-3">
+          <GlobalButton
+            onClick={handleLogout}
+            text={showText ? "Sign Out" : ""}
+            icon={<LogOut className="h-4 w-4" />}
+            className="w-full flex items-center gap-2 cursor-pointer rounded-sm px-3 py-2 text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors text-sm font-medium"
+          />
+        </SidebarFooter>
+      </Sidebar>
+  );
+};
 
-        <nav className="flex-1 px-4 py-6 space-y-2">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                  isActive
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                )}
-                onClick={() => handleSidebarOpen(false)}
-              >
-                <item.icon className="h-5 w-5" />
-                <span>{item.name}</span>
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
-      </>
-  )
-  
-}
-
-export default Sidebar
+export default SidebarComponent;

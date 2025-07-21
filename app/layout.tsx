@@ -46,10 +46,6 @@ export default function RootLayout({
             </TooltipProvider>
           </ThemeProvider>
         </ReactQueryProvider>
-        {/* <header style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1rem', borderBottom: '1px solid #eee' }}>
-          <img src="/FavIcon.png" alt="Logo" style={{ height: '40px', width: '40px', objectFit: 'contain' }} />
-          <span style={{ fontSize: '1.5rem', fontWeight: 700 }}>Vaishno Vastra Vibhag</span>
-        </header> */}
       </body>
     </html>
   );

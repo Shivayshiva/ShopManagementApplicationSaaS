@@ -36,9 +36,9 @@ const InfiniteProductScrollWithIntersectionObserver = ({
         }
       >
         {filteredProducts?.length > 0 &&
-          filteredProducts?.map((product) => (
+          filteredProducts?.map((product, index) => (
             <ProductCards
-              key={product?.id}
+              key={index}
               product={product}
               cart={cart}
               addToCart={addToCart}
