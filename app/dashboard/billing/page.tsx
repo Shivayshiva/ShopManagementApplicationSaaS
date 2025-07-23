@@ -39,22 +39,21 @@ export default function BillingPage() {
   console.log("invoices_invoices",invoices);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
       {/* Header */}
-      <div className="flex justify-between">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
         <Title
           title="Billing & Invoices"
           subtitle="Manage invoices and track payments"
         />
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <Button
             onClick={() => {
               dispatch(resetInvoiceState());
-              // Also clear localStorage
               if (typeof window !== 'undefined') {
                 localStorage.removeItem('persist:root');
               }
-              refetch(); // Refetch invoices after reset
+              refetch();
             }}
             variant="outline"
           >
@@ -69,18 +68,15 @@ export default function BillingPage() {
         </div>
       </div>
 
-      {/* Search Bar */}
-
-      {/* <div className="overflow-x-auto"> */}
+      {/* Table */}
+      <div className="overflow-x-auto">
         <GlobalTable
           columns={invoiceColumn}
           data={invoices}
           title="Invoices"
           loading={loading}
-          // stateList={invoices}
         />
-      {/* </div> */}
-
+      </div>
       <InvoiceModal
         isOpen={isCreateDialogOpen}
         onOpenChange={setIsCreateDialogOpen}

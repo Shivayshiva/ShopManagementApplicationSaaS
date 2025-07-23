@@ -110,17 +110,17 @@ export default function InvoiceModal({ isOpen, onOpenChange }: InvoiceModalProps
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-fit max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-full max-w-xs sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto p-2 sm:p-6">
         <span className="sr-only">
           <DialogTitle>Create Invoice</DialogTitle>
         </span>
-        <div className="space-y-6 p-2">
+        <div className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Create Invoice - Add Product</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <FormMultiSelect
                   label="Product Type *"
                   name="type"

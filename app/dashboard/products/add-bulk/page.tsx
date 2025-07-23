@@ -201,16 +201,16 @@ export default function AddBulkProductPage() {
   };
 
   return (
-    <div className="flex flex-col gap-y-5">
+    <div className="flex flex-col gap-y-5 px-2 sm:px-4 md:px-8">
       <div className="max-w-full">
         <Title
           title="Add Bulk Products"
           subtitle="Add multiple products to your inventory at once"
-          className="mb-10"
+          className="mb-6 sm:mb-10"
         />
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-2 gap-x-4 gap-y-6 pr-60 font-medium"
+          className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4 font-medium"
         >
           <FormTextInput
             label="Product Name"
@@ -338,7 +338,7 @@ export default function AddBulkProductPage() {
             placeholder="Enter product description"
           />
 
-          <div className="col-span-2 flex gap-4 pt-6">
+          <div className="col-span-1 sm:col-span-2 flex flex-col sm:flex-row gap-4 pt-6">
             <GlobalButton
               type="submit"
               text={isSubmitting ? "Creating Products..." : "Add Bulk Products"}

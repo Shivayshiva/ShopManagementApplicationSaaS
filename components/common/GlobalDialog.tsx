@@ -18,7 +18,7 @@ export const GlobalDialog: React.FC<GlobalDialogProps> = ({
     <DialogTrigger asChild>
       {trigger}
     </DialogTrigger>
-    <DialogContent className={contentClassName}>
+    <DialogContent className={`w-full max-w-xs sm:max-w-lg md:max-w-2xl max-h-[90vh] overflow-y-auto p-2 sm:p-6 ${contentClassName}`}>
       {title && (
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

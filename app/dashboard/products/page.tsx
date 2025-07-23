@@ -1,23 +1,7 @@
 "use client";
-
 import { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/common/CommonCard";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,32 +10,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Plus,
-  Search,
-  Filter,
   MoreHorizontal,
   Edit,
   Trash2,
   Eye,
   Package,
-  AlertTriangle,
 } from "lucide-react";
-import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import GlobalCard from "@/components/common/GlobalCard";
 import GlobalTable from "@/components/common/GlobalTable";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
 import TooltipText from "@/components/common/TooltipText";
 import type { IProduct } from "@/lib/models/Product";
 import { toast } from "@/hooks/use-toast";
 import ProductDetailsDialog from "@/components/productDetails/ProductDetailsDialog";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import ProductCards from "@/components/productCard";
 import moment from "moment";
 import { useRef } from "react";
 import UploadImageModalProductList from "@/components/uploadImageModalProductList";
@@ -281,16 +252,15 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-screen-lg">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Products</h1>
-          <p className="text-muted-foreground text-lg">
+          <h1 className="text-2xl sm:text-3xl font-bold">Products</h1>
+          <p className="text-muted-foreground text-base sm:text-lg">
             Manage your product inventory and details
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <Button asChild>
             <Link href="/dashboard/products/add">
               <Plus className="h-4 w-4 mr-2" />

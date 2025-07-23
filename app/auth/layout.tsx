@@ -11,7 +11,9 @@ export default function AuthLayout({
       {/* Left Section: Image */}
       <div className="hidden md:flex w-full md:w-1/2 h-96 md:h-screen items-center justify-center bg-gray-100">
         <Image
-          src="/Manali.jpg"
+          // src="/Manali.jpg"
+          src="/VashnoVastralayaLoginImage.jpeg"
+
           alt="Login Visual"
           className="object-cover w-full h-full"
           width={800}

@@ -188,15 +188,14 @@ export default function ShopPage() {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
       <Title
         title="Shop Display"
         subtitle="Browse and manage your product catalog"
       />
-
       <div className="space-y-4">
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
-          <div className="relative flex-1 max-w-[300px]">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-4">
+          <div className="relative flex-1 max-w-full sm:max-w-[300px]">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search products..."
@@ -205,10 +204,7 @@ export default function ShopPage() {
               className="pl-10"
             />
           </div>
-
-
         </div>
-
         <div className="flex flex-wrap gap-2">
           <GlobalFilterDropdown
             label="Category"

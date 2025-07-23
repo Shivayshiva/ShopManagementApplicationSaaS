@@ -15,7 +15,7 @@ import {
 
 // Placeholder for hooks/utilities not present in your codebase
 const useHelperApi = (fn: any) => ({ fetchData: fn });
-const binaryToBlobImageConverter = (data: any, filename: string) => {};
+const binaryToBlobImageConverter = (data: any, filename: string) => { };
 
 export default function GlobalTable({
   columns,
@@ -27,16 +27,16 @@ export default function GlobalTable({
   apiFunction,
   stateList = [],
   currentPage = 1,
-  setCurrentPage = () => {},
+  setCurrentPage = () => { },
   currentPageCount = 10,
-  setCurrentPageCount = () => {},
+  setCurrentPageCount = () => { },
   totalPages = 1,
   totalCount = 0,
-  updateList = () => {},
-  ListFetchAPI = () => {},
+  updateList = () => { },
+  ListFetchAPI = () => { },
   isImportRequired = false,
   cardView = false,
-  isSearchFieldRequired=true
+  isSearchFieldRequired = true
 }: any) {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selected, setSelected] = useState<Array<string>>([]);
@@ -46,13 +46,13 @@ export default function GlobalTable({
   const [openImportDialog, setOpenImportDialog] = useState(false);
   const [activeView, setActiveView] = useState("table");
 
-//   const debounceFunction = useDebounce(apiFunction, 300);
+  //   const debounceFunction = useDebounce(apiFunction, 300);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
     setSearchValue(text);
     if (text || text === "") {
-    //   debounceFunction(text, currentPageCount, currentPage);
+      //   debounceFunction(text, currentPageCount, currentPage);
     }
   };
 
@@ -105,219 +105,193 @@ export default function GlobalTable({
     }
   };
 
-  const handleDeleteEntry = async () => {
-    let result: any;
-    if (isDeleteAll) {
-      result = await deleteData(isDeleteAll);
-      if (result?.success) {
-        setSelected([]);
-        setDeleteDialogOpen(false);
-        updateList(selected);
-      }
-      return;
-    } else {
-      result = await deleteData(isDeleteAll, selected);
-    }
-    if (result?.success) {
-      setSelected([]);
-      setDeleteDialogOpen(false);
-      updateList(selected);
-    }
-  };
 
-  const handleCancelButtonClick = () => {
-    setSelected([]);
-    setDeleteDialogOpen(false);
-  };
+
+
+
 
   return (
-    <div className="space-y-4 w-full max-w-screen-xl mx-auto">
-      <div className="flex flex-col xl:flex-row w-full items-start md:items-center justify-between gap-4">
-        {/* Search Bar */}
-        {isSearchFieldRequired && <div className="relative w-full xl:max-w-xs">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 h-4 w-5" />
-          <Input
-            placeholder="Search..."
-            value={searchValue}
-            onChange={handleChange}
-            className="pl-10 w-full px-8 py-4"
-          />
-        </div>}
+    <div className="space-y-4 w-full mr-0 sm:mr-10 md:mr-20">
+            <div className="flex flex-col md:flex-row w-full items-start md:items-center justify-between gap-2 md:gap-4">
+      {/* Search Bar */}
+      {isSearchFieldRequired && <div className="relative w-full max-w-full md:max-w-xs">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800 h-4 w-5" />
+        <Input
+          placeholder="Search..."
+          value={searchValue}
+          onChange={handleChange}
+          className="pl-10 w-full px-4 py-2 md:px-8 md:py-4"
+        />
+      </div>}
 
-        {/* Buttons */}
-        <div className="flex  sm:flex-row flex-wrap items-start md:items-center gap-2 w-full xl:w-auto">
-          {cardView && (
-            <div className="flex gap-2 justify-end">
-              <button
-                onClick={() => setActiveView("table")}
-                className={`px-4 py-2 rounded-sm text-sm ${
-                  activeView === "table"
-                    ? "bg-[#02837A] text-white"
-                    : "bg-gray-200 text-gray-700"
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row flex-wrap items-start md:items-center gap-2 w-full md:w-auto">
+        {cardView && (
+          <div className="flex gap-2 justify-end">
+            <button
+              onClick={() => setActiveView("table")}
+              className={`px-4 py-2 rounded-sm text-sm ${activeView === "table"
+                  ? "bg-[#02837A] text-white"
+                  : "bg-gray-200 text-gray-700"
                 }`}
-              >
-                <List />
-              </button>
-              <button
-                onClick={() => setActiveView("card")}
-                className={`px-4 py-2 rounded-sm text-sm ${
-                  activeView === "card"
-                    ? "bg-[#02837A] text-white"
-                    : "bg-gray-200 text-gray-700"
+            >
+              <List />
+            </button>
+            <button
+              onClick={() => setActiveView("card")}
+              className={`px-4 py-2 rounded-sm text-sm ${activeView === "card"
+                  ? "bg-[#02837A] text-white"
+                  : "bg-gray-200 text-gray-700"
                 }`}
-              >
-                <LayoutDashboard />
-              </button>
-            </div>
-          )}
-          {selected?.length > 0 && (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-2 border-gray-800 px-5 py-1 rounded-sm border-1">
-                Delete
-                <ChevronDown className="w-4 h-4 cursor-pointer" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Button
-                    variant="outline"
-                    className="flex items-center w-full gap-2 cursor-pointer bg-white text-black border-gray-600 hover:border-gray-950 hover:bg-gray-200"
-                    onClick={() => onHandleDelete(false)}
-                  >
-                    Delete {selected?.length > 0 && `(${selected?.length})`}
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Button
-                    variant="outline"
-                    className="flex items-center gap-2 cursor-pointer bg-white text-black border-gray-600 hover:border-gray-950 hover:bg-gray-200"
-                    onClick={() => onHandleDelete(true)}
-                  >
-                    Delete All <Trash2 className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+            >
+              <LayoutDashboard />
+            </button>
+          </div>
+        )}
+        {selected?.length > 0 && (
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2 border-gray-800 px-5 py-1 rounded-sm border-1">
-              Export
+              Delete
               <ChevronDown className="w-4 h-4 cursor-pointer" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem>
                 <Button
                   variant="outline"
-                  className="flex items-center gap-2 cursor-pointer bg-white text-black border-gray-600 hover:border-gray-950 hover:bg-gray-200 w-full"
-                  onClick={() => onHandleExport(false)}
+                  className="flex items-center w-full gap-2 cursor-pointer bg-white text-black border-gray-600 hover:border-gray-950 hover:bg-gray-200"
+                  onClick={() => onHandleDelete(false)}
                 >
-                  <Download className="w-full" />
-                  Export
+                  Delete {selected?.length > 0 && `(${selected?.length})`}
+                  <Trash2 className="h-4 w-4" />
                 </Button>
               </DropdownMenuItem>
-
-              {isImportRequired && (
-                <DropdownMenuItem>
-                  <Button
-                    variant="outline"
-                    className="w-full border border-gray-700"
-                    onClick={() => setOpenImportDialog(true)}
-                  >
-                    <CloudUpload /> Import
-                  </Button>
-                </DropdownMenuItem>
-              )}
               <DropdownMenuItem>
-                {" "}
                 <Button
                   variant="outline"
                   className="flex items-center gap-2 cursor-pointer bg-white text-black border-gray-600 hover:border-gray-950 hover:bg-gray-200"
-                  onClick={() => onHandleExport(true)}
+                  onClick={() => onHandleDelete(true)}
                 >
-                  <Download className="h-4 w-4" />
-                  Export All
+                  Delete All <Trash2 className="h-4 w-4" />
                 </Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-      </div>
+        )}
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex items-center gap-2 border-gray-800 px-5 py-1 rounded-sm border-1">
+            Export
+            <ChevronDown className="w-4 h-4 cursor-pointer" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>
+              <Button
+                variant="outline"
+                className="flex items-center gap-2 cursor-pointer bg-white text-black border-gray-600 hover:border-gray-950 hover:bg-gray-200 w-full"
+                onClick={() => onHandleExport(false)}
+              >
+                <Download className="w-full" />
+                Export
+              </Button>
+            </DropdownMenuItem>
 
-      <div className="border rounded-lg overflow-hidden w-full">
-        <div className="overflow-x-auto w-full">
-          {activeView === "table" ? (
-            <div className="">
-              <Table className="min-w-max w-full">
-                <TableHeader className="bg-gray-200 text-center">
-                  <TableRow>
-                    <TableHead className="w-[50px]">
+            {isImportRequired && (
+              <DropdownMenuItem>
+                <Button
+                  variant="outline"
+                  className="w-full border border-gray-700"
+                  onClick={() => setOpenImportDialog(true)}
+                >
+                  <CloudUpload /> Import
+                </Button>
+              </DropdownMenuItem>
+            )}
+            <DropdownMenuItem>
+              {" "}
+              <Button
+                variant="outline"
+                className="flex items-center gap-2 cursor-pointer bg-white text-black border-gray-600 hover:border-gray-950 hover:bg-gray-200"
+                onClick={() => onHandleExport(true)}
+              >
+                <Download className="h-4 w-4" />
+                Export All
+              </Button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </div>
+
+      <div className="border rounded-lg w-full overflow-x-auto">
+        {activeView === "table" ? (
+          <Table className="w-full min-w-[600px] md:min-w-0">
+            <TableHeader className="bg-gray-200 text-center">
+              <TableRow>
+                <TableHead className="w-[50px]">
+                  <Checkbox
+                    className="border-gray-700"
+                    checked={isSelectAll}
+                    onCheckedChange={handleSelectAll}
+                    aria-label="Select all"
+                  />
+                </TableHead>
+                {columns?.map((column: any, index: number) => (
+                  <TableHead
+                    key={index}
+                    className="font-medium text-gray-700 text-center"
+                  >
+                    {column?.header}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {loading ? (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns?.length + 1}
+                    className="h-24 text-center"
+                  >
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ) : data?.length > 0 ? (
+                data?.map((item: any, rowIndex: number) => (
+                  <TableRow
+                    key={rowIndex}
+                    className="hover:bg-gray-50 text-center"
+                  >
+                    <TableCell>
                       <Checkbox
-                        className="border-gray-700"
-                        checked={isSelectAll}
-                        onCheckedChange={handleSelectAll}
-                        aria-label="Select all"
+                        checked={selected.includes(item._id || item.id)}
+                        onCheckedChange={() => handleSingleSelect(item._id || item.id)}
+                        aria-label={`Select row ${rowIndex + 1}`}
+                        className="border-gray-700 text-center"
                       />
-                    </TableHead>
-                    {columns?.map((column: any, index: number) => (
-                      <TableHead
-                        key={index}
-                        className="font-medium text-gray-700 text-center"
-                      >
-                        {column?.header}
-                      </TableHead>
+                    </TableCell>
+                    {columns?.map((column: any, colIndex: number) => (
+                      <TableCell key={colIndex} className="pl-5">
+                        {column?.cell && column?.cell(item)}
+                      </TableCell>
                     ))}
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {loading ? (
-                    <TableRow>
-                      <TableCell
-                        colSpan={columns?.length + 1}
-                        className="h-24 text-center"
-                      >
-                        <div className="flex items-center justify-center">
-                          <Loader2 className="h-10 w-10 animate-spin text-gray-800" />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ) : data?.length > 0 ? (
-                    data?.map((item: any, rowIndex: number) => (
-                      <TableRow
-                        key={rowIndex}
-                        className="hover:bg-gray-50 text-center"
-                      >
-                        <TableCell>
-                          <Checkbox
-                            checked={selected.includes(item._id || item.id)}
-                            onCheckedChange={() => handleSingleSelect(item._id || item.id)}
-                            aria-label={`Select row ${rowIndex + 1}`}
-                            className="border-gray-700 text-center"
-                          />
-                        </TableCell>
-                        {columns?.map((column: any, colIndex: number) => (
-                          <TableCell key={colIndex} className="pl-5">
-                            {column?.cell && column?.cell(item)}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    ))
-                  ) : (
-                    <TableRow>
-                      <TableCell
-                        colSpan={columns?.length + 1}
-                        className="text-center py-8 text-gray-500"
-                      >
-                        No data found matching your search criteria.
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
-          ) : (
-            cardView && <div>Card View Placeholder</div>
-          )}
-        </div>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns?.length + 1}
+                    className="text-center py-8 text-gray-500"
+                  >
+                    No data found matching your search criteria.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        ) : (
+          cardView && <div>Card View Placeholder</div>
+        )}
       </div>
 
       <div className="flex items-center justify-between px-2">

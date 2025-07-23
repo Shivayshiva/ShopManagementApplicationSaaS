@@ -100,9 +100,9 @@ export default function AddNewCustomerPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
         <Button
           variant="ghost"
           size="icon"
@@ -116,7 +116,6 @@ export default function AddNewCustomerPage() {
           subtitle="Create a new customer profile"
         />
       </div>
-
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -127,7 +126,7 @@ export default function AddNewCustomerPage() {
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Basic Information */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <FormTextInput
                 label="Full Name *"
                 name="name"
@@ -157,7 +156,7 @@ export default function AddNewCustomerPage() {
             {/* Address Information */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Address Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <FormTextInput
                   label="Street Address *"
                   name="address.street"
@@ -214,7 +213,7 @@ export default function AddNewCustomerPage() {
             {/* Additional Information */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Additional Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <FormNumberInput
                   label="Total Visit Count"
                   name="totalVisitCount"
@@ -234,16 +233,17 @@ export default function AddNewCustomerPage() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex justify-end gap-4 pt-6 border-t">
+            <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t">
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => router.back()}
                 disabled={mutation.status === "pending"}
+                className="w-full sm:w-auto"
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={mutation.status === "pending"}>
+              <Button type="submit" disabled={mutation.status === "pending"} className="w-full sm:w-auto">
                 {mutation.status === "pending" ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />

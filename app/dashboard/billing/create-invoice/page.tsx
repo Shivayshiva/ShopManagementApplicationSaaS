@@ -242,23 +242,22 @@ export default function CreateInvoicePage() {
 
 
   return (
-    <div className="w-full max-w-4xl">
+    <div className="w-full max-w-4xl px-2 sm:px-4 md:px-8">
       <Title title="Create Invoice" />
       <StaffSelection ref={staffRef} />
       <Title title="Customer Details" className="text-lg" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-6">
         <CustomerDetails ref={customerDetailsRef} handleCustomerDetailsPass={handleCustomerDetailsPass} />
       </div>
       <Separator className="my-6" />
       <div className="">
         <ProductDetails ref={productDetailsRef} />
       </div>
-
-      <div className="flex justify-end mt-8">
+      <div className="flex flex-col sm:flex-row justify-end gap-4 mt-8">
         <GlobalButton
           onClick={handleSave}
           text="Create Invoice"
-          className="w-fit"
+          className="w-full sm:w-fit"
           variant="default"
         />
       </div>

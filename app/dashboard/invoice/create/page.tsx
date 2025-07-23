@@ -106,10 +106,10 @@ export default function CreateInvoicePage() {
 
   return (
 
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 px-2 sm:px-4 md:px-8">
       <div className="w-full max-w-4xl">
-      <span className="sr-only">
-          <h2>Create Invoiceeeeeeeeeeee</h2>
+        <span className="sr-only">
+          <h2>Create Invoice</h2>
         </span>
         <div className="space-y-6 p-2">
           <Card>
@@ -117,7 +117,7 @@ export default function CreateInvoicePage() {
               <CardTitle>Create Invoice - Add Product</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <FormMultiSelect
                   label="Product Type *"
                   name="type"
@@ -165,8 +165,8 @@ export default function CreateInvoicePage() {
                   max={100}
                   error={errors.discountPercentage?.message}
                 />
-                <div className="flex items-end">
-                  <Button onClick={handleSubmit(onAddProduct)} className="w-full">
+                <div className="flex flex-col gap-2 md:flex-row md:items-end md:gap-4">
+                  <Button onClick={handleSubmit(onAddProduct)} className="w-full md:w-auto">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Product
                   </Button>

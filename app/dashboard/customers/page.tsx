@@ -70,10 +70,10 @@ export default function CustomersPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
       {/* Header */}
-      <div className="flex justify-between">
-        <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
+        <div className="flex flex-col gap-1">
           <Title
             title="Customers"
             subtitle="Manage customer relationships and purchase history"
@@ -86,7 +86,7 @@ export default function CustomersPage() {
             />
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <GlobalButton
             text="Refresh"
             icon={
@@ -108,7 +108,7 @@ export default function CustomersPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <StatCard
           title="Total Customers"
           icon={<Users className="h-4 w-4 text-muted-foreground" />}
@@ -135,7 +135,7 @@ export default function CustomersPage() {
         />
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
         <Title title="Customer List" />
       </div>
       <div className="overflow-x-auto">

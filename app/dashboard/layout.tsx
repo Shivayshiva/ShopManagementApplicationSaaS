@@ -10,6 +10,28 @@ import HeaderSection from "@/components/common/Header";
 import SidebarComponent from "@/components/common/Sidebar";
 import { SidebarProvider, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 
+function MainWithSidebarResponsive({ children }: { children: React.ReactNode }) {
+  const { isMobile, state } = useSidebar();
+  // Sidebar widths from sidebar.tsx
+  const SIDEBAR_WIDTH = "16rem";
+  const SIDEBAR_WIDTH_ICON = "3rem";
+  // Only apply margin on desktop
+  const marginLeft = isMobile ? undefined : state === "expanded" ? SIDEBAR_WIDTH : SIDEBAR_WIDTH_ICON;
+  return (
+    <main
+      className={`p-4 sm:p-6 ${isMobile ? "max-w-[90vw]" :"max-w-[80vw]" }  transition-all duration-200`}
+      // style={marginLeft ? { marginLeft } : undefined}
+    >
+      <Suspense>
+        <Providers>
+          <SidebarTrigger />
+          {children}
+        </Providers>
+      </Suspense>
+    </main>
+  );
+}
+
 export default function DashboardLayout({
   children,
 }: {
@@ -39,21 +61,11 @@ export default function DashboardLayout({
   // };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-background flex w-full overflow-x-hidden">
       <SidebarProvider>
-        <SidebarComponent
-          // sidebarOpen={sidebarOpen}
-          // handleSidebarOpen={setSidebarOpen}
-        />
+        <SidebarComponent />
         <div className="flex-1 w-full flex flex-col">
-          <main className="p-4 sm:p-6 min-w-[80vw]">
-            <Suspense>
-              <Providers>
-                <SidebarTrigger />
-                {children}
-              </Providers>
-            </Suspense>
-          </main>
+          <MainWithSidebarResponsive>{children}</MainWithSidebarResponsive>
         </div>
       </SidebarProvider>
 

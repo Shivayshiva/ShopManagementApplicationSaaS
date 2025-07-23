@@ -11,6 +11,7 @@ import { Badge } from "../ui/badge";
 import { format } from "date-fns";
 import StaffAttendanceDialog from "../staffAttendanceDialog";
 import { useStaff } from "@/hooks/useStaff";
+import Title from "../common/Title";
 
 const attendanceHistory = [
   {
@@ -295,15 +296,7 @@ function AttendanceHistoryStaff() {
       cell: (record: any) =>  record?.attendance?.find(
         (item) => item?.date?.slice(0, 10) === new Date().toISOString().slice(0, 10)
       )?.checkOut ?? "-",
-    },
-    // {
-    //   header: "Total Hours",
-    //   cell: (record: any) => record?.totalHours,
-    // },
-    // {
-    //   header: "Status",
-    //   cell: (record: any) => getStatusBadge(record?.status),
-    // },
+    }
   ];
 
   const getStaffAttendanceStatus = (staffId: string, date: Date) => {
@@ -334,55 +327,38 @@ function AttendanceHistoryStaff() {
   // Show loading state
   if (isLoading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Attendance History</CardTitle>
-          <CardDescription>Historical attendance records</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center py-8">
-            <div className="text-gray-500">Loading staff data...</div>
-          </div>
-        </CardContent>
-      </Card>
+      <div>
+        <Title title="Attendance History" subtitle="Historical attendance records" />
+        <div className="flex items-center justify-center py-8">
+          <div className="text-gray-500">Loading staff data...</div>
+        </div>
+      </div>
     );
   }
 
   // Show error state
   if (error) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Attendance History</CardTitle>
-          <CardDescription>Historical attendance records</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center py-8">
-            <div className="text-red-500">
-              Error loading staff data: {error.message}
-            </div>
+      <div>
+        <Title title="Attendance History" subtitle="Historical attendance records" />
+        <div className="flex items-center justify-center py-8">
+          <div className="text-red-500">
+            Error loading staff data: {error.message}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   return (
-    <>
-      <Card>
-        <CardHeader>
-          <CardTitle>Attendance History</CardTitle>
-          <CardDescription>Historical attendance records</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <GlobalTable
-            columns={attendanceHistoryColumns}
-            data={staffResponse?.data}
-            title="Attendance History"
-            isSearchFieldRequired={false}
-          />
-        </CardContent>
-      </Card>
+    <div className="w-full">
+      <Title title="Attendance History" subtitle="Historical attendance records" />
+      <GlobalTable
+        columns={attendanceHistoryColumns}
+        data={staffResponse?.data}
+        title="Attendance History"
+        isSearchFieldRequired={false}
+      />
 
       <StaffAttendanceDialog
         isStaffCalendarOpen={isStaffCalendarOpen}
@@ -393,7 +369,7 @@ function AttendanceHistoryStaff() {
         isStaffAttendanceMarked={isStaffAttendanceMarked}
         getStaffAttendanceStatus={getStaffAttendanceStatus}
       />
-    </>
+    </div>
   );
 }
 

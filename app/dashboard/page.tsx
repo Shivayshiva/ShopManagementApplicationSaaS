@@ -8,15 +8,15 @@ import { TrendingUp, TrendingDown, DollarSign, Package, Users, ShoppingCart } fr
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">Welcome back! Here's what's happening with your shop.</p>
+        <h1 className="text-2xl sm:text-3xl font-bold">Dashboard</h1>
+        <p className="text-sm sm:text-base text-muted-foreground">Welcome back! Here's what's happening with your shop.</p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
         <GlobalCard
           title="Total Revenue"
           header={<DollarSign className="h-4 w-4 text-muted-foreground" />}
@@ -76,7 +76,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <GlobalCard
           title="Sales Overview"
           content={null}
@@ -84,7 +84,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Orders and Top Products */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <GlobalCard
           title="Recent Orders"
           content={

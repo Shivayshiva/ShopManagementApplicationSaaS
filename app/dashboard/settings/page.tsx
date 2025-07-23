@@ -11,11 +11,11 @@ import { Store, User, Bell, Shield, Palette, CreditCard } from "lucide-react"
 
 export default function SettingsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold">Settings</h1>
-        <p className="text-muted-foreground">Manage your shop settings and preferences</p>
+        <h1 className="text-2xl sm:text-3xl font-bold">Settings</h1>
+        <p className="text-muted-foreground text-base sm:text-lg">Manage your shop settings and preferences</p>
       </div>
 
       {/* Shop Information */}
@@ -27,7 +27,7 @@ export default function SettingsPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="shopName">Shop Name</Label>
               <Input id="shopName" defaultValue="My Awesome Shop" />
@@ -47,7 +47,7 @@ export default function SettingsPage() {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="shopPhone">Phone Number</Label>
               <Input id="shopPhone" defaultValue="+1 (555) 123-4567" />
@@ -71,7 +71,7 @@ export default function SettingsPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="firstName">First Name</Label>
               <Input id="firstName" defaultValue="John" />
@@ -82,7 +82,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="userEmail">Email</Label>
               <Input id="userEmail" type="email" defaultValue="john@example.com" />

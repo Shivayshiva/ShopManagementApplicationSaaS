@@ -60,14 +60,14 @@ export default function ReportsPage() {
   const totalExpenses = expenseData.reduce((sum, item) => sum + item.expenses, 0)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 px-2 sm:px-4 md:px-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Reports & Analytics</h1>
-          <p className="text-muted-foreground">Comprehensive business insights and performance metrics</p>
+          <h1 className="text-2xl sm:text-3xl font-bold">Reports & Analytics</h1>
+          <p className="text-muted-foreground text-base sm:text-lg">Comprehensive business insights and performance metrics</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <Button variant="outline">
             <Calendar className="h-4 w-4 mr-2" />
             Date Range
@@ -80,7 +80,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
@@ -139,7 +139,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Charts Row 1 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Revenue Trend</CardTitle>
@@ -175,7 +175,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Charts Row 2 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Sales by Category</CardTitle>
@@ -225,7 +225,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Top Products and Performance Metrics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Top Performing Products</CardTitle>

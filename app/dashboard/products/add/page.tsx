@@ -200,15 +200,15 @@ export default function AddProductPage() {
 
 
   return (
-    <div className="max-w-full">
+    <div className="max-w-full px-2 sm:px-4 md:px-8">
       <Title
         title="Add Product"
         subtitle="Add a new product to your inventory"
-        className="mb-10"
+        className="mb-6 sm:mb-10"
       />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-x-4 gap-y-6 pr-60 font-medium"
+        className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4 font-medium"
       >
         <FormTextInput
           label="Product Name"
@@ -312,7 +312,7 @@ export default function AddProductPage() {
           placeholder="Enter product description"
         />
 
-        <div className="col-span-2 flex gap-4 pt-6">
+        <div className="col-span-1 sm:col-span-2 flex flex-col sm:flex-row gap-4 pt-6">
           <GlobalButton type="submit" text="Add Product" className="flex-1" />
           <GlobalButton type="button" text="Cancel" variant="outline" className="flex-1" />
         </div>

@@ -16,7 +16,7 @@ const ProductDetailsDialog: React.FC<ProductDetailsDialogProps> = ({ open, onOpe
   if (!product) return null;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
+      <DialogContent className="w-full max-w-xs sm:max-w-lg md:max-w-2xl max-h-[80vh] overflow-y-auto p-2 sm:p-6">
         <DialogHeader>
           <DialogTitle className="text-base">Product Details</DialogTitle>
         </DialogHeader>

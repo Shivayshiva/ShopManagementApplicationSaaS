@@ -12,6 +12,7 @@ import { Badge } from "../ui/badge";
 import GlobalButton from "../common/globalButton";
 import { Clock, DumbbellIcon } from "lucide-react";
 import { useStaff, usePatchStaffAttendance } from "@/hooks/useStaff";
+import Title from "../common/Title";
 
 function TodayAttendanceTable() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -177,54 +178,47 @@ function TodayAttendanceTable() {
   // Show loading state
   if (isLoading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Staff Status</CardTitle>
-          <CardDescription>Current attendance status for today</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center py-8">
-            <div className="text-gray-500">Loading staff data...</div>
-          </div>
-        </CardContent>
-      </Card>
+      <div>
+        <div>
+          <h2 className="text-lg font-semibold">Staff Status</h2>
+          <p className="text-sm text-gray-500">Current attendance status for today</p>
+        </div>
+        <div className="flex items-center justify-center py-8">
+          <div className="text-gray-500">Loading staff data...</div>
+        </div>
+      </div>
     );
   }
 
   // Show error state
   if (error) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Staff Status</CardTitle>
-          <CardDescription>Current attendance status for today</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center py-8">
-            <div className="text-red-500">
-              Error loading staff data: {error.message}
-            </div>
+      <div>
+        <div>
+          <h2 className="text-lg font-semibold">Staff Status</h2>
+          <p className="text-sm text-gray-500">Current attendance status for today</p>
+        </div>
+        <div className="flex items-center justify-center py-8">
+          <div className="text-red-500">
+            Error loading staff data: {error.message}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Staff Status</CardTitle>
-        <CardDescription>Current attendance status for today</CardDescription>
-      </CardHeader>
-      <CardContent>
+    <div>
+      <Title title="Staff Status" subtitle="Current attendance status for today" />
+      <div>
         <GlobalTable
           columns={staffColumns}
           data={filteredStaff}
           title="Staff Attendance"
           isSearchFieldRequired={false}
         />
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
