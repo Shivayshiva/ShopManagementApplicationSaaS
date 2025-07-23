@@ -46,8 +46,7 @@ export default function LoginPage() {
   }
 
   return (
-    // <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-lg bg-gray-200 p-12 rounded-xl shadow-xl border-2 border-gray-300  flex flex-col items-center">
+      <div className="w-full max-w-lg bg-white p-12 rounded-xl shadow-2xl border-2 border-gray-400 flex flex-col items-center">
         <Title title="Log in to your Account" subtitle="Enter your email and password to log in" className="mb-6 text-start" />
         <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
           <FormTextInput
@@ -84,6 +83,5 @@ export default function LoginPage() {
           </Button>
         </form>
       </div>
-    // </div>
   )
 } 
