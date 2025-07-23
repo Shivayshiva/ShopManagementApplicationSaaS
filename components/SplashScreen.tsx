@@ -10,12 +10,12 @@ export default function SplashScreen() {
     // Show content after a brief delay
     const contentTimer = setTimeout(() => {
       setShowContent(true)
-    }, 500)
+    }, 1000)
 
     // Simulate loading completion
     const loadingTimer = setTimeout(() => {
       setIsLoading(false)
-    }, 4000)
+    }, 8000)
 
     return () => {
       clearTimeout(contentTimer)
