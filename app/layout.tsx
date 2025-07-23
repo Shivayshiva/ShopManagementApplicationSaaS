@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     "Complete shop management application with analytics, inventory, and billing",
   manifest: "/manifest.json",
   icons: {
-    icon: "/FavIcon.png",
-    apple: "/FavIcon.png",
+    icon: "/48IMAGE48.png",
+    apple: "/48IMAGE48.png",
   },
 };
 
@@ -29,7 +29,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="apple-touch-icon" href="/FAVICON1212.png" />
+        <link rel="apple-touch-icon" href="/48IMAGE48.png" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Shop Manager" />
       </head>

@@ -133,61 +133,6 @@ export default function CreateInvoicePage() {
     watched.customerAddress,
   ]);
 
-  // const calculatePricing = (data = watched) => {
-  //   const basePrice = data.quantity * data.rate;
-  //   const gstAmount = (basePrice * data.gstPercentage) / 100;
-  //   const totalWithGst = basePrice + gstAmount;
-  //   const discountAmount = (totalWithGst * data.discountPercentage) / 100;
-  //   const finalPrice = totalWithGst - discountAmount;
-  //   return {
-  //     price: basePrice,
-  //     gst: gstAmount,
-  //     discountedPrice: finalPrice,
-  //   };
-  // };
-
-  // const onAddProduct = (data: any) => {
-  //   if (!data.type || !data.serialNumber || data.rate <= 0) {
-  //     return;
-  //   }
-  //   const pricing = calculatePricing(data);
-  //   const newProduct: Product = {
-  //     id: Date.now().toString(),
-  //     type: data.type,
-  //     serialNumber: data.serialNumber,
-  //     quantity: data.quantity,
-  //     rate: data.rate,
-  //     price: pricing.price,
-  //     gst: pricing?.gst,
-  //     discountedPrice: pricing.discountedPrice,
-  //   };
-  //   setDraftInvoice((prev) => ({
-  //     ...prev,
-  //     products: [...prev.products, newProduct],
-  //   }));
-  //   reset();
-  // };
-
-  // const onAddProductOnQRCodeScan = (data: any) => {
-  //   if (!data.type || !data.serialNumber || data.rate <= 0) {
-  //     return;
-  //   }
-  //   const newProduct: Product = {
-  //     id: Date?.now()?.toString(),
-  //     type: data?.type,
-  //     serialNumber: data?.serialNumber,
-  //     quantity: data?.quantity,
-  //     rate: data?.rate,
-  //     price: data?.price,
-  //     gst: data?.gst,
-  //     discountedPrice: data?.discountedPrice,
-  //   };
-
-  //   console.log("DFSDLFLSDF_SDFWWWWW_SKSKD", newProduct);
-  //   // setProducts((prev) => [...prev, newProduct]); // This line was removed
-  //   reset();
-  // };
-
   const handleSave = () => {
     setStaffError("");
     const selectedProductListDetails = productDetailsRef?.current;

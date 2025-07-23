@@ -119,19 +119,12 @@ const ProductDetails = forwardRef((_, ref) => {
   };
 
   const handleProductFound = (productData: any) => {
+    console.log("productData_123_productData", productData);
     setValue("type", productData.type || "");
     setValue("serialNumber", productData.serialNumber || "");
-    
-    // Automatically add the product when found via search
-    // if (productData.type && productData.serialNumber) {
-      // const newProduct: Product = {
-      //   id: Date.now().toString(),
-      //   type: productData.type,
-      //   serialNumber: productData.serialNumber,
-      // };
+   
       setProductList(prev => [...prev, productData]);
       reset();
-    // }
   };
 
   const columns = [

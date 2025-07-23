@@ -88,12 +88,10 @@ export default function AddBulkProductPage() {
     calculateSellPrices();
   }, [purchasePrice, gst, npp, discount, setValue]);
 
-  console.log("KL_sSSSdfd_W_ER_WR", addedPRoductsIds);
 
   const onSubmit = async (data: AddBulkProductFormData) => {
     setIsSubmitting(true);
     try {
-      console.log("_34_34_3434_34_34", data);
       const response = await fetch("/api/products", {
         method: "PATCH",
         headers: {
