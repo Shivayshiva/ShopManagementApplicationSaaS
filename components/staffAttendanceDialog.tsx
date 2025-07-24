@@ -42,7 +42,7 @@ const StaffAttendanceDialog = ({
 
   return (
     <Dialog open={isStaffCalendarOpen} onOpenChange={setIsStaffCalendarOpen}>
-      <DialogContent className="max-w-lg overflow-y-auto">
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <CalendarIcon className="w-5 h-5" />
@@ -76,7 +76,7 @@ const StaffAttendanceDialog = ({
                 head_cell:
                   "text-muted-foreground rounded-md w-10 h-10 font-normal text-base", // larger header cells
                 row: "flex w-full mt-2 gap-2", // add gap between rows
-                cell: "h-10 w-10 text-center text-base p-0 relative gap-2 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20", // larger cells and add gap
+                cell: "h-8 w-8 text-center text-base p-0 relative gap-2 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20", // larger cells and add gap
                 day: "h-10 w-10 p-0 font-normal aria-selected:opacity-100", // larger day buttons
                 day_selected:
                   "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",

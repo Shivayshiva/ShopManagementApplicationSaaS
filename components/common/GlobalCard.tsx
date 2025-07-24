@@ -27,7 +27,7 @@ export default function GlobalCard({
   return (
     <Card className={className}>
       {(header || title || description) && (
-        <CardHeader className={headerClassName}>
+        <CardHeader className={` ${headerClassName}`}>
           {header}
           {title && <CardTitle>{title}</CardTitle>}
           {description && <CardDescription>{description}</CardDescription>}
@@ -35,6 +35,6 @@ export default function GlobalCard({
       )}
       <CardContent className={contentClassName}>{content}</CardContent>
       {footer && <CardFooter className={footerClassName}>{footer}</CardFooter>}
-    </Card>
+    </Card> 
   )
 } 

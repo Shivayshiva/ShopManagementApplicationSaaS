@@ -16,7 +16,7 @@ const ProductDetailsDialog: React.FC<ProductDetailsDialogProps> = ({ open, onOpe
   if (!product) return null;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-full max-w-xs sm:max-w-lg md:max-w-2xl max-h-[80vh] overflow-y-auto p-2 sm:p-6">
+      <DialogContent className="w-full max-w-xs sm:max-w-lg md:max-w-2xl max-h-[80vh] overflow-y-auto rounded-sm scroll-m-0 p-2 sm:p-6">
         <DialogHeader>
           <DialogTitle className="text-base">Product Details</DialogTitle>
         </DialogHeader>
@@ -28,17 +28,17 @@ const ProductDetailsDialog: React.FC<ProductDetailsDialogProps> = ({ open, onOpe
               <Image
                 src={product.barCode}
                 alt="Barcode"
-                width={384} // doubled from 192
-                height={128} // doubled from 64
-                className="w-96 h-32 object-contain border rounded bg-white" // doubled from w-48 h-16
+                width={240} // doubled from 192
+                height={200} // doubled from 64
+                className="object-contain border-black rounded bg-white" // doubled from w-48 h-16
                 onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
-                unoptimized
+                // unoptimized
               />
             ) : (
               <span className="text-muted-foreground">No barcode image</span>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-2">
             <div className="break-words">
               <span className="font-semibold">Name:</span> <span className="break-all">{product.name}</span>
             </div>

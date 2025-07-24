@@ -1,31 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-
 import {
   Plus,
-  Search,
-  Download,
-  Eye,
-  Receipt,
-  DollarSign,
-  FileText,
-  Calendar,
 } from "lucide-react";
 import Title from "@/components/common/Title";
-import { useSelector, useDispatch } from "react-redux";
-import type { Invoice, Product } from "@/lib/features/invoiceSlice";
+import { useDispatch } from "react-redux";
 import { resetInvoiceState } from "@/lib/features/invoiceSlice";
-import GlobalCard from "@/components/common/GlobalCard";
 import GlobalTable from "@/components/common/GlobalTable";
 import InvoiceModal from "@/components/InvoiceCreateModal";
 import { useRouter } from "next/navigation";
 import { invoiceColumn } from "@/components/commonColumns";
-import { RootState } from "@/lib/store";
 import { useInvoices } from '@/hooks/useInvoices';
 
 export default function BillingPage() {
@@ -36,7 +22,6 @@ export default function BillingPage() {
   // Fetch invoices using TanStack Query
   const { invoices, loading, error, refetch } = useInvoices();
 
-  console.log("invoices_invoices",invoices);
 
   return (
     <div className="space-y-4 px-2 sm:px-4 md:px-8">
@@ -48,18 +33,6 @@ export default function BillingPage() {
         />
         <div className="flex flex-col sm:flex-row gap-2">
           <Button
-            onClick={() => {
-              dispatch(resetInvoiceState());
-              if (typeof window !== 'undefined') {
-                localStorage.removeItem('persist:root');
-              }
-              refetch();
-            }}
-            variant="outline"
-          >
-            Reset State
-          </Button>
-          <Button
             onClick={() => router.push("/dashboard/billing/create-invoice")}
             variant="default"
           >
@@ -69,14 +42,12 @@ export default function BillingPage() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
         <GlobalTable
           columns={invoiceColumn}
           data={invoices}
           title="Invoices"
           loading={loading}
         />
-      </div>
       <InvoiceModal
         isOpen={isCreateDialogOpen}
         onOpenChange={setIsCreateDialogOpen}

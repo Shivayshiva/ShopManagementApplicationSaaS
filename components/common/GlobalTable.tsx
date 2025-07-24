@@ -223,10 +223,10 @@ export default function GlobalTable({
 
       <div className="border rounded-lg w-full overflow-x-auto">
         {activeView === "table" ? (
-          <Table className="w-full min-w-[600px] md:min-w-0">
+          <Table className="w-full">
             <TableHeader className="bg-gray-200 text-center">
               <TableRow>
-                <TableHead className="w-[50px]">
+                <TableHead className="max-w-fit">
                   <Checkbox
                     className="border-gray-700"
                     checked={isSelectAll}
@@ -249,7 +249,7 @@ export default function GlobalTable({
                 <TableRow>
                   <TableCell
                     colSpan={columns?.length + 1}
-                    className="h-24 text-center"
+                    className="h-fit text-center"
                   >
                     <div className="flex items-center justify-center">
                       <Loader2 className="h-10 w-10 animate-spin text-gray-800" />

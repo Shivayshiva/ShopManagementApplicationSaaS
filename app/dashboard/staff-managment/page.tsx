@@ -62,13 +62,6 @@ export default function StaffAttendancePage() {
             open={isAddStaffDialogOpen}
             onOpenChange={setIsAddStaffDialogOpen}
           />
-          <GlobalButton
-            text="Export"
-            icon={<Download className="w-4 h-4" />}
-            variant="outline"
-            size="sm"
-            className="bg-black text-white border-black rounded-lg hover:bg-gray-800"
-          />
         </div>
       </div>
 

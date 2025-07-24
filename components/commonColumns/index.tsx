@@ -191,7 +191,7 @@ export const customerTableColumn = (
             </Button>
           }
           title="Customer Details"
-          contentClassName="max-w-2xl"
+          contentClassName=" sm:max-w-sm lg:max-w-lg rounded-lg scroll-m-0"
         >
           {customer && (
             <div className="space-y-6">
@@ -218,7 +218,7 @@ export const customerTableColumn = (
                   />
                   <LabelValueRow
                     label="Avg Order:"
-                    value={`$${(
+                    value={`Rs.${(
                       customer.totalSpent / customer.totalOrders
                     ).toFixed(2)}`}
                   />
@@ -287,9 +287,9 @@ export const invoiceColumn = [
             </Button>
           }
           title="Customer Details"
-          contentClassName="max-w-md"
+          contentClassName="sm:max-w-2xl lg:max-w-xl lg:border-radius-lg"
         >
-          <div className="space-y-4">
+          <div className="space-y-2">
             <LabelValueRow label="Name:" value={row?.customer?.name} />
             <LabelValueRow label="Phone:" value={row?.customer?.phone} />
             <LabelValueRow label="Email:" value={row?.customer?.email} />

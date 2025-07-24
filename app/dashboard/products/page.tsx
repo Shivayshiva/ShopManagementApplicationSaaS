@@ -200,7 +200,10 @@ export default function ProductsPage() {
     },
     {
       header: "Purchase Date",
-      cell: (product: any) => product?.purchaseDate ? moment(product.purchaseDate).format("DD MMM YYYY, hh:mm A") : "-",
+      cell: (product: any) => 
+        <div className="max-w-fit">
+          {product?.purchaseDate ? moment(product.purchaseDate).format("DD MMM YYYY, hh:mm A") : "-"}
+        </div>,
     },
     
     {
@@ -252,7 +255,8 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="space-y-4 px-2 sm:px-4 md:px-8">
+    <>
+    <div className="space-y-4 px-2 sm:px-2 md:px-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Products</h1>
@@ -260,25 +264,18 @@ export default function ProductsPage() {
             Manage your product inventory and details
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Button asChild>
+        <div className="flex sm:flex-row gap-2 flex-wrap justify-between">
+          {/* <Button asChild>
             <Link href="/dashboard/products/add">
               <Plus className="h-4 w-4 mr-2" />
               Add Product
             </Link>
-          </Button>
-          <Button asChild variant="outline">
+          </Button> */}
+          <Button asChild >
             <Link href="/dashboard/products/add-bulk">
               <Package className="h-4 w-4 mr-2" />
               Add Bulk Product
             </Link>
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={handleDeleteAll}
-            disabled={isDeletingAll || isLoading || products.length === 0}
-          >
-            {isDeletingAll ? "Deleting..." : "Delete All"}
           </Button>
         </div>
       </div>
@@ -299,7 +296,6 @@ export default function ProductsPage() {
           stateList={filteredProducts}
         />
       )}
-      <ProductDetailsDialog open={detailsOpen} onOpenChange={setDetailsOpen} product={selectedProduct} />
       {/* Upload Images Modal */}
       
 
@@ -314,7 +310,10 @@ export default function ProductsPage() {
       
       {/* SKU Images Modal */}
 
-      <ImagePreviewProductList skuImagesOpen={skuImagesOpen} setSkuImagesOpen={setSkuImagesOpen} skuImages={skuImages} />
     </div>
+      <ProductDetailsDialog open={detailsOpen} onOpenChange={setDetailsOpen} product={selectedProduct} />
+      <ImagePreviewProductList skuImagesOpen={skuImagesOpen} setSkuImagesOpen={setSkuImagesOpen} skuImages={skuImages} />
+
+    </>
   );
 }

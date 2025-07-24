@@ -19,7 +19,7 @@ function MainWithSidebarResponsive({ children }: { children: React.ReactNode }) 
   const marginLeft = isMobile ? undefined : state === "expanded" ? SIDEBAR_WIDTH : SIDEBAR_WIDTH_ICON;
   return (
     <main
-      className={`p-4 sm:p-6 ${isMobile ? "max-w-[90vw]" :"max-w-[80vw]" }  transition-all duration-200`}
+      className={`p-4 sm:p-6 ${isMobile ? "max-w-[100vw]" :"max-w-[80vw]" }  transition-all duration-200`}
       // style={marginLeft ? { marginLeft } : undefined}
     >
       <Suspense>
