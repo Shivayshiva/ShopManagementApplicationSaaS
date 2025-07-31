@@ -1,21 +1,25 @@
-"use client";
+
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
-import SplashScreen from "@/components/SplashScreen";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { publicRoutes } from "@/constants/route.constants.ts/routes.public";
+import { roleBasedRoutes } from "@/lib/roleRoutes";
 
-export default function HomePage() {
-  const [loading, setLoading] = useState(true);
+export default async function HomePage({ loading }: { loading: boolean }) {
+  const session = await getServerSession(authOptions);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 6000);
-    return () => clearTimeout(timer);
-  }, []);
+  console.log(" ", session);
 
-  useEffect(() => {
-    if (!loading) {
-      redirect("/dashboard");
-    }
-  }, [loading]);
+  const role = session?.user?.role;
+  const Roleroutes = roleBasedRoutes?.[role];
 
-  return loading ? <SplashScreen /> : null;
+  if (session === null) {
+    redirect(publicRoutes.AUTH_LOGIN);
+  }
+  if (Roleroutes && Roleroutes.length > 0) {
+    redirect(Roleroutes[0]);
+  }
+
+  return <div>Unauthorized or no default route found</div>;
 }
+

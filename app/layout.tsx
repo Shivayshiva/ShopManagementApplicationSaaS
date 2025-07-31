@@ -4,8 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Providers from "@/lib/Providers";
 import ReactQueryProvider from "./providers/ReactQueryProvider";
-  import { TooltipProvider } from "@/components/ui/tooltip";
-
+import { TooltipProvider } from "@/components/ui/tooltip";
+import SplashWrapper from "@/components/splashWrapper";
 
 export const metadata: Metadata = {
   title: "Vaishno Vastra Vibhag",
@@ -42,7 +42,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>
-              <Providers>{children}</Providers>
+              <Providers>
+                <SplashWrapper>{children}</SplashWrapper>
+              </Providers>
             </TooltipProvider>
           </ThemeProvider>
         </ReactQueryProvider>

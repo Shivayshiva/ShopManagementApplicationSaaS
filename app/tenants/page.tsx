@@ -1,21 +1,17 @@
-"use client";
-
 import GlobalCard from "@/components/common/GlobalCard";
 import { Badge } from "@/components/ui/badge";
 import { recentOrders_dashboard, topProducts_dashboard } from "@/lib/dummyData";
 import {
   TrendingUp,
   TrendingDown,
-  DollarSign,
   Package,
-  Users,
-  ShoppingCart,
 } from "lucide-react";
 import DashboardStatsCards from "@/components/dashboard/DashboardStatsCards";
 
 export default function DashboardPage() {
   return (
     <div className="space-y-4 px-2 ">
+      
       {/* Header */}
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold">Dashboard</h1>

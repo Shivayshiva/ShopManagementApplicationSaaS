@@ -5,22 +5,19 @@ import Providers from "@/lib/Providers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import GlobalLoader from "@/components/common/GlobalLoader";
-import Sidebar from "@/components/common/Sidebar";
-import HeaderSection from "@/components/common/Header";
-import SidebarComponent from "@/components/common/Sidebar";
+import SidebarComponent from "@/components/sidebarComponents/tenants.sidebar";
 import { SidebarProvider, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+import { publicRoutes } from "@/constants/route.constants.ts/routes.public";
 
 function MainWithSidebarResponsive({ children }: { children: React.ReactNode }) {
   const { isMobile, state } = useSidebar();
   // Sidebar widths from sidebar.tsx
   const SIDEBAR_WIDTH = "16rem";
   const SIDEBAR_WIDTH_ICON = "3rem";
-  // Only apply margin on desktop
-  const marginLeft = isMobile ? undefined : state === "expanded" ? SIDEBAR_WIDTH : SIDEBAR_WIDTH_ICON;
+  // const marginLeft = isMobile ? undefined : state === "expanded" ? SIDEBAR_WIDTH : SIDEBAR_WIDTH_ICON;
   return (
     <main
       className={`p-4 sm:p-6 ${isMobile ? "max-w-[100vw]" :"max-w-[80vw]" }  transition-all duration-200`}
-      // style={marginLeft ? { marginLeft } : undefined}
     >
       <Suspense>
         <Providers>
@@ -39,12 +36,11 @@ export default function DashboardLayout({
 }) {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.replace("/auth/login");
+      router.replace(publicRoutes.AUTH_LOGIN);
     }
   }, [status, router]);
 
@@ -56,9 +52,7 @@ export default function DashboardLayout({
     );
   }
 
-  // const handleSidebarOpen = (status: boolean) => {
-  //   setSidebarOpen(status);
-  // };
+
 
   return (
     <div className="min-h-screen bg-background flex w-full overflow-x-hidden">
@@ -68,9 +62,6 @@ export default function DashboardLayout({
           <MainWithSidebarResponsive>{children}</MainWithSidebarResponsive>
         </div>
       </SidebarProvider>
-
-
-
     </div>
   );
 }

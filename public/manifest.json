@@ -2,7 +2,7 @@
   "name": "Shop Management App",
   "short_name": "Vashno Emporium",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#9ea3a1",
   "theme_color": "#070808",
   "icons": [
