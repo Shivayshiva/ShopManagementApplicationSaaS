@@ -70,6 +70,7 @@ import GlobalTable from "@/components/common/GlobalTable";
 import { shopTableColumns } from "@/components/common/GlobalTableComponents";
 import { useShops } from "@/hooks/useShops";
 import SplashScreenModal from "@/components/SplashListModal";
+import ShopDetailModal from "@/components/shopDetailsModal";
 
 export default function ShopsPage() {
   const { toast } = useToast();
@@ -86,6 +87,7 @@ export default function ShopsPage() {
   const [splashListModalOpen, setSplashListModalOpen] = useState(false);
   const [shopId, setShopId] = useState("");
   const [splashIdList, setSplashIdList] = useState<any[]>([]);
+  const [shopDetailModalOpen, setShopDtailModalOpen]=useState(false)
   const [config, setConfig] = useState({
     shopName: "Your Shop",
     slogan: "Quality & Excellence",
@@ -431,6 +433,9 @@ export default function ShopsPage() {
           shopId={shopId}
         />
       )}
+
+
+{/* {shopDetailModalOpen && <ShopDetailModal open={shopDetailModalOpen} setOpen={setShopDtailModalOpen} shopDetails={shopDetails}/>} */}
     </div>
   );
 }

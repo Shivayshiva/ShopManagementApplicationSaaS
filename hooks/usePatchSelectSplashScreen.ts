@@ -8,7 +8,7 @@ interface PatchSelectSplashScreenArgs {
 async function patchSelectSplashScreen({ shopId, splashScreenId }: PatchSelectSplashScreenArgs) {
     console.log("SS_QQ_EE__TT_YY_HN", { shopId, splashScreenId });
 
-  const res = await fetch(`/api/shop/${shopId}`, {
+  const res = await fetch(`/api/superAdmin/shop/${shopId}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ splashScreenId }),
