@@ -3,6 +3,31 @@ import connectDB from '@/lib/database';
 import Shop from '@/lib/models/Shops';
 import SplashScreen from '@/lib/models/SplashScreens';
 
+
+
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    await connectDB();
+    const splashScreen = await SplashScreen.findById(params.id);
+    if (!splashScreen) {
+      return NextResponse.json(
+        { success: false, message: 'Splash screen not found' },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json({ success: true, splashScreen }, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { success: false, message: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+
 export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
@@ -12,7 +37,6 @@ export async function PUT(
     const shopId = params.id;
     const body = await req.json();
 
-    // Validate shop exists
     const shop = await Shop.findById(shopId);
     if (!shop) {
       return NextResponse.json(

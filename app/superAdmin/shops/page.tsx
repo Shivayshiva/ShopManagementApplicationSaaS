@@ -61,14 +61,15 @@ import {
 } from "lucide-react";
 import GlobalButton from "@/components/common/globalButton";
 import SplashScreenCreationModal from "@/components/dummySplashScreen";
-import SplashScreen, { TransitionStyle } from "@/components/splashScreenDisplayModal";
+import SplashScreen, {
+  TransitionStyle,
+} from "@/components/splashScreenDisplayModal";
 import { AnimationType } from "framer-motion";
 import ShopRegistrationModal from "@/components/superAdminShopAddition";
 import GlobalTable from "@/components/common/GlobalTable";
 import { shopTableColumns } from "@/components/common/GlobalTableComponents";
 import { useShops } from "@/hooks/useShops";
-
-
+import SplashScreenModal from "@/components/SplashListModal";
 
 export default function ShopsPage() {
   const { toast } = useToast();
@@ -82,6 +83,9 @@ export default function ShopsPage() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingShop, setEditingShop] = useState<any>(null);
   const [showSplash, setShowSplash] = useState(false);
+  const [splashListModalOpen, setSplashListModalOpen] = useState(false);
+  const [shopId, setShopId] = useState("");
+  const [splashIdList, setSplashIdList] = useState<any[]>([]);
   const [config, setConfig] = useState({
     shopName: "Your Shop",
     slogan: "Quality & Excellence",
@@ -108,7 +112,6 @@ export default function ShopsPage() {
     lastLogin: "Never",
   });
 
-
   // Fetch shops from API
   const { shops, loading, error, pagination, refetch } = useShops({
     page,
@@ -119,7 +122,8 @@ export default function ShopsPage() {
 
   // Filter client-side for status/plan if not supported by API
   const filteredShops = shops.filter((shop: any) => {
-    const matchesStatus = statusFilter === "all" || shop.status === statusFilter;
+    const matchesStatus =
+      statusFilter === "all" || shop.status === statusFilter;
     const matchesPlan = planFilter === "all" || shop.plan === planFilter;
     return matchesStatus && matchesPlan;
   });
@@ -253,22 +257,50 @@ export default function ShopsPage() {
     });
   };
 
-  const handleSplashSCreenCreation = (id:string) => {
+  const handleSplashSCreenCreation = (id: string) => {
     setSplashSetupModal(true);
     setSplashSetupId(id);
   };
 
-  const handleSplashScreenClose = (id:string) => {
+  const handleSplashScreenClose = (id: string) => {
     setSplashSetupModal(false);
     setSplashSetupId("");
   };
 
   const handlePreviewCompleteFn = () => {
     setShowSplash(false);
-    setSplashSetupModal(true);
+    splashSetupModal && setSplashSetupModal(true);
   };
 
-  console.log("Shops_data", shops);
+
+  const handleOpenSplashScreensList = (splashScreens: any[],id) => {
+    // Logic to open a modal or page to display all splash screens
+    console.log("Splash Screens:", splashScreens);
+    setSplashIdList(splashScreens);
+    setShopId(id)
+    setSplashListModalOpen(true);
+  };
+
+  const handleSplashListModal = (open: boolean) => {
+    setSplashListModalOpen(open);
+  };
+
+  const handlePreviewFn = (screen: any) => {
+    handleSplashListModal(false);
+    setShowSplash(true);
+    setConfig({
+      shopName: screen.shopName,
+      slogan: screen.slogan,
+      backgroundColor: screen.backgroundColor,
+      textColor: screen.textColor,
+      logoSvg: "",
+      logoWidth: screen.logoWidth,
+      logoHeight: screen.logoHeight,
+      animationType: screen.animationType,
+      duration: screen.duration,
+      transitionStyle: screen.transitionStyle,
+    });
+  };
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
@@ -345,7 +377,12 @@ export default function ShopsPage() {
         </CardHeader>
         <CardContent>
           <GlobalTable
-            columns={shopTableColumns(handleShopAction, handleDeleteShop, handleSplashSCreenCreation)}
+            columns={shopTableColumns(
+              handleShopAction,
+              handleDeleteShop,
+              handleSplashSCreenCreation,
+              handleOpenSplashScreensList
+            )}
             data={shops}
             loading={loading}
             title="Shops"
@@ -358,7 +395,6 @@ export default function ShopsPage() {
           />
         </CardContent>
       </Card>
-
 
       <SplashScreenCreationModal
         open={splashSetupModal}
@@ -383,6 +419,16 @@ export default function ShopsPage() {
           duration={config.duration}
           transitionStyle={config.transitionStyle}
           onComplete={handlePreviewCompleteFn}
+        />
+      )}
+
+      {splashListModalOpen && (
+        <SplashScreenModal
+          open={splashListModalOpen}
+          onOpenChange={handleSplashListModal}
+          splashIdList={splashIdList}
+          handlePreviewFn={handlePreviewFn}
+          shopId={shopId}
         />
       )}
     </div>
