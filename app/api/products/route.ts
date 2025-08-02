@@ -184,7 +184,6 @@ export async function PATCH(request: NextRequest) {
           monthStr = (dateObj.getMonth() + 1).toString().padStart(2, '0');
         }
         const sku = `T${billNoLast2}${nppStr}${dayStr}${monthStr}`;
-        // Remove barCode generation, will set after QR upload
 
         // Prepare product data as per schema and frontend payload
         console.log("body_body_body",body)
@@ -237,7 +236,7 @@ export async function PATCH(request: NextRequest) {
         try {
           const domain = process.env.NEXT_PUBLIC_DOMAIN ;
           const port = process.env.NEXT_PUBLIC_PORT;
-          const productUrl = `${domain}:${port}/product/${savedProduct._id}`;
+          const productUrl = `http://localhost:4000/product/${savedProduct._id}`;
           const qrDataUrl = await QRCode.toDataURL(productUrl);
 
           const uploadResponse = await cloudinary.uploader.upload(qrDataUrl, {
@@ -245,9 +244,9 @@ export async function PATCH(request: NextRequest) {
             public_id: `product_${savedProduct._id}`,
             overwrite: true,
           });
-          console.log("PP_df_R_WE_ETR_DF",uploadResponse?.secure_url)
+          console.log("2222222222222222222222222",uploadResponse?.secure_url)
           savedProduct.qrCode = uploadResponse.secure_url;
-          savedProduct.barCode = uploadResponse.secure_url; // Set barCode to QR code URL
+          savedProduct.barCode = uploadResponse.secure_url;
           await savedProduct.save();
         } catch (qrError) {
           console.error('QR/Cloudinary error:', qrError);

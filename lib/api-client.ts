@@ -250,6 +250,11 @@ class ApiClient {
     return this.request<ApiResponse>(endpoint);
   }
 
+  async getInvoiceById(id: string): Promise<ApiResponse> {
+    const endpoint = `/api/invoices/${id}`;
+    return this.request<ApiResponse>(endpoint);
+  }
+
   // Product API methods
   async deleteProductImage(productId: string, imageUrl: string): Promise<ApiResponse<{ images: string[] }>> {
     return this.request<ApiResponse<{ images: string[] }>>('/api/products/deleteImage', {
@@ -264,6 +269,7 @@ export const apiClient = new ApiClient();
 
 export const addInvoice = apiClient.addInvoice.bind(apiClient);
 export const getInvoices = apiClient.getInvoices.bind(apiClient);
+export const getInvoiceById = apiClient.getInvoiceById.bind(apiClient);
 
 // Export individual functions for convenience
 export const customerApi = {

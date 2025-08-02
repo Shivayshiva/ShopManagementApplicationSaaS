@@ -43,11 +43,11 @@ const CameraBarcodeScanner: React.FC<CameraBarcodeScannerProps> = ({
         (result, err, controls) => {
           if (!active) return;
           if (result) {
-            console.log("RS_RS_RS", JSON.parse(result?.text));
-            onResult( JSON.parse(result?.text));
+            console.log("RS_54556_RS_RS", result?.text);
+            onResult( result?.text);
             setScanning(false);
             controls.stop();
-            onOpenChange(false); // Close modal
+            // onOpenChange(false); // Close modal
           }
           if (err && err.name !== "NotFoundException") {
             setError("Error scanning barcode");

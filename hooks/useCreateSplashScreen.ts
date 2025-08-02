@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
-export async function createSplashScreen(data: any) {
-  const res = await fetch('/api/superAdmin/splashScreen', {
+export async function createSplashScreen(id: string, data: any) {
+  const res = await fetch(`/api/superAdmin/splashScreen/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -17,6 +17,6 @@ export async function createSplashScreen(data: any) {
 
 export function useCreateSplashScreen() {
   return useMutation({
-    mutationFn: createSplashScreen,
+    mutationFn: ({ id, data }: { id: string; data: any }) => createSplashScreen(id, data),
   });
 }

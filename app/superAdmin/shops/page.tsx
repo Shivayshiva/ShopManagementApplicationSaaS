@@ -367,6 +367,7 @@ export default function ShopsPage() {
         config={config}
         setConfig={setConfig}
         setSplashSetupModal={setSplashSetupModal}
+        splashSetupId={splashSetupId}
       />
 
       {showSplash && (

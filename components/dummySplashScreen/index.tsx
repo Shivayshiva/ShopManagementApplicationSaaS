@@ -63,6 +63,7 @@ export default function SplashScreenCreationModal({
   config,
   setConfig,
   setSplashSetupModal,
+  splashSetupId
 }: SplashScreenCreationModalProps) {
   const { control, handleSubmit, setValue, getValues } = useForm({
     defaultValues: config,
@@ -79,6 +80,8 @@ export default function SplashScreenCreationModal({
       reader.readAsText(file);
     }
   };
+
+  console.log("_WEWEWEWEWEWE_weEWWEWEWEEW",splashSetupId) 
 
   const animationTypes: {
     value: AnimationType;
@@ -323,10 +326,9 @@ export default function SplashScreenCreationModal({
 
   const onSubmit = async (data: any) => {
     try {
-      await createSplashScreenMutation.mutateAsync(data);
+      await createSplashScreenMutation.mutateAsync({ id: splashSetupId, data });
       setSplashSetupModal(false);
     } catch (error) {
-      // Optionally handle error (e.g., show toast)
       console.error("Failed to create splash screen", error);
     }
   };

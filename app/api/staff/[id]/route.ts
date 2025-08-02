@@ -158,6 +158,8 @@ export async function PATCH(
       );
     }
 
+    console.log("params_params_id", params?.id);
+
     // Find staff member
     const staff = await Staff.findById(params?.id);
     if (!staff) {

@@ -14,6 +14,7 @@ export interface IShop extends Document {
   aadharCard: string;
   addressLine1: string;
   addressLine2?: string;
+  splashScreen?: mongoose.Types.ObjectId[];
   city: string;
   state: string;
   country: string;
@@ -38,6 +39,7 @@ const ShopSchema: Schema = new Schema<IShop>({
   aadharCard: { type: String, required: true },
   addressLine1: { type: String, required: true },
   addressLine2: { type: String },
+  splashScreen: [{ type: Schema.Types.ObjectId, ref: 'SplashScreen' }],
   city: { type: String, required: true },
   state: { type: String, required: true },
   country: { type: String, required: true },

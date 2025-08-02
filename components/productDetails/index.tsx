@@ -12,6 +12,7 @@ import GlobalTable from "../common/GlobalTable";
 import { GlobalDialog } from "../common/GlobalDialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "../ui/carousel";
 import Image from "next/image";
+import { IProduct } from "@/lib/models/Product";
 
 // Zod validation schema for product details
 const productDetailsSchema = z.object({
@@ -40,7 +41,7 @@ interface Product {
 
 const ProductDetails = forwardRef((_, ref) => {
   const [productList, setProductList] = useState<Product[]>([]);
-  console.log("productList_productList",productList)
+  console.log("productList_productList", productList)
   const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   const form = useForm<ProductDetailsFormData>({
@@ -66,65 +67,61 @@ const ProductDetails = forwardRef((_, ref) => {
 
   // Handle form submission
   const onSubmit = (data: ProductDetailsFormData) => {
-    
+
     const newProduct: Product = {
       _id: Date.now().toString(),
       barCode: "",
       billNo: "",
-      discount: 0, 
-      gst: 0, 
-      images: [], 
-      name: data.type, 
-      productOf: "", 
+      discount: 0,
+      gst: 0,
+      images: [],
+      name: data.type,
+      productOf: "",
       purchaseDate: new Date().toISOString(),
       sellPrice: 0,
-      tags: [], 
+      tags: [],
       type: data.type,
       serialNumber: data.serialNumber,
     };
-    
+
     setProductList(prev => [...prev, newProduct]);
     reset();
   };
 
-  const handleBarCodeScannedData = (response: any) => {
-    if (typeof response === 'object' && response !== null) {
-      setValue("type", response.type || "");
-      setValue("serialNumber", response.serialNumber || "");
-      
-      // Automatically add the product when scanned
-      if (response.type && response.serialNumber) {
-        const newProduct: Product = {
-          _id: Date.now().toString(),
-          barCode: "", // Placeholder, will be updated by scanner
-          billNo: "", // Placeholder
-          discount: 0, // Placeholder
-          gst: 0, // Placeholder
-          images: [], // Placeholder
-          name: response.type, // Placeholder, will be updated by scanner
-          productOf: "", // Placeholder
-          purchaseDate: new Date().toISOString(), // Placeholder
-          sellPrice: 0, // Placeholder
-          tags: [], // Placeholder
-          type: response.type,
-          serialNumber: response.serialNumber,
-        };
-        setProductList(prev => [...prev, newProduct]);
-        reset();
+
+  const fetchProductById = async (url: string) => {
+    console.log("1111111111111111111111111111111111", res);
+
+    if (url) {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.success ) {
+        // setIsScannerOpen(false);
+        return data.data as IProduct;
+      } else {
+        throw new Error(data.error || "Failed to fetch product");
       }
-    } else if (typeof response === 'string') {
-      setValue("serialNumber", response);
     }
-    setIsScannerOpen(false);
+
+  };
+
+  const handleBarCodeScannedData = (response: any) => {
+    console.log("response_response_11111response_response", response);
+
+    if(response){
+      fetchProductById(response);
+    }
+
+
   };
 
   const handleProductFound = (productData: any) => {
     console.log("productData_123_productData", productData);
     setValue("type", productData.type || "");
     setValue("serialNumber", productData.serialNumber || "");
-   
-      setProductList(prev => [...prev, productData]);
-      reset();
+
+    setProductList(prev => [...prev, productData]);
+    reset();
   };
 
   const columns = [
@@ -167,13 +164,15 @@ const ProductDetails = forwardRef((_, ref) => {
     { header: 'Purchase Date', cell: (item: Product) => item.purchaseDate },
     { header: 'GST', cell: (item: Product) => `${item.gst}%` },
     { header: 'Sell Price', cell: (item: Product) => `₹${item.sellPrice}` },
-    { header: 'Tags', cell: (item: Product) => (
-      <div className="flex flex-wrap gap-1">
-        {item.tags.map((tag, idx) => (
-          <span key={idx} className="bg-gray-200 text-xs px-2 py-0.5 rounded">{tag}</span>
-        ))}
-      </div>
-    ) },
+    {
+      header: 'Tags', cell: (item: Product) => (
+        <div className="flex flex-wrap gap-1">
+          {item.tags.map((tag, idx) => (
+            <span key={idx} className="bg-gray-200 text-xs px-2 py-0.5 rounded">{tag}</span>
+          ))}
+        </div>
+      )
+    },
     { header: 'Discount', cell: (item: Product) => `${item.discount}%` },
   ];
 
@@ -200,7 +199,7 @@ const ProductDetails = forwardRef((_, ref) => {
           onProductFound={handleProductFound}
         />
 
-        
+
       </form>
 
       {productList.length > 0 && (
@@ -219,7 +218,7 @@ const ProductDetails = forwardRef((_, ref) => {
         onResult={handleBarCodeScannedData}
         isScannerOpen={isScannerOpen}
         onOpenChange={setIsScannerOpen}
-        // isSearchFieldRequired={false}
+      // isSearchFieldRequired={false}
       />
     </>
   );
