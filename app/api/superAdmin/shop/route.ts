@@ -37,13 +37,18 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10', 10);
     const page = parseInt(searchParams.get('page') || '1', 10);
     const skip = (page - 1) * limit;
+    const activeOnly = searchParams?.get('activeOnly') === 'true';
 
+    // Build query based on parameters
+    const query = activeOnly ? { isActive: true } : {};
+    
     const [shops, total] = await Promise.all([
-      Shop.find().skip(skip).limit(limit),
-      Shop.countDocuments()
+      Shop.find(),
+      Shop.countDocuments(query)
     ]);
 
-    return NextResponse.json({
+  console.log("D_D_F_G_E_W_G_H_G", shops)
+    return NextResponse.json({  
       success: true,
       data: shops,
       pagination: {

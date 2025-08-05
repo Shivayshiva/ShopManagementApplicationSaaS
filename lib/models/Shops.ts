@@ -23,6 +23,7 @@ export interface IShop extends Document {
   geoCoordinates?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  isActive?:Boolean;
 }
 
 
@@ -47,6 +48,7 @@ const ShopSchema: Schema = new Schema<IShop>({
   country: { type: String, required: true },
   pincode: { type: String, required: true, index: true },
   geoCoordinates: { type: String },
+  isActive:{ type: Boolean, default: false },
 }, { timestamps: true });
 
 export default mongoose.models.Shop || mongoose.model<IShop>('Shop', ShopSchema);

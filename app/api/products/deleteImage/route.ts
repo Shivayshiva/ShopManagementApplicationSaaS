@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/database';
 import Product from '@/lib/models/Product';
-import cloudinary from '@/lib/cloudinary';
+import { deleteImageFromCloudinary } from '@/lib/cloudinary';
 
 export const runtime = 'nodejs';
 
@@ -25,17 +25,7 @@ export async function DELETE(request: NextRequest) {
     product.images = newImages;
     await product.save();
     // Remove from Cloudinary
-    // Extract public_id from imageUrl (format: .../upload/v1234/folder/filename.ext)
-    const matches = imageUrl.match(/\/upload\/v\d+\/(.+)$/);
-    let publicId = matches ? matches[1].replace(/\.[a-zA-Z0-9]+$/, '') : null;
-    if (publicId) {
-      try {
-        await cloudinary.uploader.destroy(publicId, { resource_type: 'image' });
-      } catch (err) {
-        // Log but don't fail the request if Cloudinary fails
-        console.error('Cloudinary delete error:', err);
-      }
-    }
+    await deleteImageFromCloudinary(imageUrl);
     return NextResponse.json({ success: true, images: product.images });
   } catch (error) {
     if (error instanceof Error) {

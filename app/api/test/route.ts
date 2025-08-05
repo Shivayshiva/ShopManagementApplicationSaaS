@@ -1,30 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/database';
 
-export async function GET(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    // Test database connection
-    await connectDB();
+    const body = await req.json();
     
+    // Test the user creation data structure
+    const testData = {
+      gstNumber: "ABCDE1234F",
+      email: "test@example.com",
+      name: "Test User",
+      mobileNumber: "9876543210",
+      role: "staff" as const,
+      shopId: "test_shop_id",
+      superAdminId: "super_admin_id",
+      panCardNumber: "ABCDE1234F",
+      aadharCardNumber: "123456789012",
+      panCardImage: "https://example.com/pan.jpg",
+      aadharCardFrontImage: "https://example.com/aadhar_front.jpg",
+      aadharCardBackImage: "https://example.com/aadhar_back.jpg",
+      profileImage: "https://example.com/profile.jpg"
+    };
+
     return NextResponse.json({
       success: true,
-      message: 'Backend is working correctly!',
-      timestamp: new Date().toISOString(),
-      database: 'Connected',
-      features: [
-        'MongoDB with Mongoose',
-        'Product Management API',
-        'Customer Management API', 
-        'Invoice Management API',
-        'Dashboard Statistics API'
-      ]
+      message: "Test data structure is valid",
+      data: testData
     });
   } catch (error) {
-    console.error('Test API Error:', error);
     return NextResponse.json({
       success: false,
-      error: 'Database connection failed',
-      timestamp: new Date().toISOString()
+      error: "Test failed"
     }, { status: 500 });
   }
 } 

@@ -21,6 +21,8 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import GlobalButton from "./globalButton";
+import SplashScreenModal from "../SplashListModal";
+import ShopDetailsModal from "../shopDetailsModal";
 
 export const shopTableColumns = (
   handleShopAction,
@@ -142,6 +144,12 @@ export const shopTableColumns = (
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+      ),
+    },
+    {
+      header: "Shop Details",
+      cell: (shop: any) => (
+       <ShopDetailsModal shopId={shop?._id} />
       ),
     },
     {

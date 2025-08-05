@@ -38,6 +38,8 @@ import {
   MessageSquare,
   Ban,
 } from "lucide-react"
+import CreateUserModal from "./components/createUserModal"
+import UserRegistrationModal from "./components/createUserModal"
 
 
   const users = [
@@ -85,17 +87,18 @@ export default function UsersPage() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const [messageDialog, setMessageDialog] = useState<any>(null)
-  const [message, setMessage] = useState("")
-  const [newUser, setNewUser] = useState({
-    name: "",
-    email: "",
-    role: "Staff",
-    shop: "",
-    status: "active" as const,
-    lastLogin: "Never",
-    joinDate: new Date().toISOString().split("T")[0],
-    orders: 0,
-  })
+  const [message, setMessage] = useState("");
+
+    const [newUser, setNewUser] = useState({
+      name: "",
+      email: "",
+      role: "Staff",
+      shop: "",
+      status: "active" as const,
+      lastLogin: "Never",
+      joinDate: new Date().toISOString().split("T")[0],
+      orders: 0,
+    })
 
 
 
@@ -345,80 +348,8 @@ export default function UsersPage() {
             <Mail className="mr-2 h-4 w-4" />
             Send Notification
           </Button>
-          <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-            <DialogTrigger asChild>
-              <Button>
-                <Plus className="mr-2 h-4 w-4" />
-                Add User
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Add New User</DialogTitle>
-                <DialogDescription>Create a new user account.</DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name *
-                  </Label>
-                  <Input
-                    id="name"
-                    value={newUser.name}
-                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                    className="col-span-3"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="email" className="text-right">
-                    Email *
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={newUser.email}
-                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                    className="col-span-3"
-                  />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="role" className="text-right">
-                    Role
-                  </Label>
-                  <Select value={newUser.role} onValueChange={(value) => setNewUser({ ...newUser, role: value })}>
-                    <SelectTrigger className="col-span-3">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Owner">Owner</SelectItem>
-                      <SelectItem value="Manager">Manager</SelectItem>
-                      <SelectItem value="Staff">Staff</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="shop" className="text-right">
-                    Shop *
-                  </Label>
-                  <Select value={newUser.shop} onValueChange={(value) => setNewUser({ ...newUser, shop: value })}>
-                    <SelectTrigger className="col-span-3">
-                      <SelectValue placeholder="Select shop" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {shops.map((shop) => (
-                        <SelectItem key={shop.id} value={shop.name}>
-                          {shop.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <DialogFooter>
-                <Button onClick={handleAddUser}>Add User</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+
+        <UserRegistrationModal/>
         </div>
       </div>
 
