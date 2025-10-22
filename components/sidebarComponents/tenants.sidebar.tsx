@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { BarChart3, Package, Store, Receipt, Users, TrendingDown, PersonStanding, LogOut } from 'lucide-react';
 import GlobalButton from '@/components/common/globalButton';
 import {
@@ -33,8 +33,10 @@ const SidebarComponent = () => {
 
   const showText = isMobile ? openMobile : state === "expanded";
 
+  const router = useRouter();
   const handleLogout = () => {
-    signOut({ callbackUrl: '/auth/login' });
+    // Auth removed: navigate to login page. Re-integrate signOut when auth is added back.
+    router.push('/auth/login');
   };
 
   return (

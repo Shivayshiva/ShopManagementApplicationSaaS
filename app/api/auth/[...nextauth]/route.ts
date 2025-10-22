@@ -1,4 +1,7 @@
-import NextAuth, { getServerSession } from "next-auth";
+// NOTE: next-auth route is preserved here for future re-enable but currently
+// the handler exports are disabled because the app auth setup has been removed.
+// Re-enable by restoring NextAuth imports and exporting the handler.
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/lib/models/User";
 import dbConnect from "@/lib/database";
@@ -68,8 +71,8 @@ export const authOptions={
   },
 };
 
-const handler = NextAuth(authOptions);
-
-export default handler;
-
-export { handler as GET, handler as POST };
+// const handler = NextAuth(authOptions);
+//
+// export default handler;
+//
+// export { handler as GET, handler as POST };

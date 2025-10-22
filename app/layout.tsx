@@ -43,7 +43,9 @@ export default function RootLayout({
           >
             <TooltipProvider>
               <Providers>
-                <SplashWrapper>{children}</SplashWrapper>
+                {/* <SplashWrapper> */}
+                  {children}
+                {/* </SplashWrapper> */}
               </Providers>
             </TooltipProvider>
           </ThemeProvider>

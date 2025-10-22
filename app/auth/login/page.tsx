@@ -8,7 +8,6 @@ import Title from "@/components/common/Title";
 import { Button } from "@/components/ui/button";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { tenantsRoutes } from "@/constants/route.constants.ts/routes.tenants";
 import { superAdminRoutes } from "@/constants/route.constants.ts/routes.superAdmin";
@@ -37,23 +36,22 @@ export default function LoginPage() {
   });
   const router = useRouter();
 
-  const { data: session, status } = useSession();
-
-  console.log("SW_FG_QE_BR_YD_D_G_D", session, status);
-
   const onSubmit = async (data: LoginFormData) => {
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-    });
-
-    console.log("sdf_wewe_vb_a_qwe_ter", result);
-    if (result?.ok) {
-      router.replace("/");
-    }
-    if (result?.error) {
-      alert(result.error);
+    // Auth removed: call placeholder API or handle login manually later.
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        router.replace('/');
+      } else {
+        const json = await res.json().catch(() => ({}));
+        alert(json?.message || 'Login failed');
+      }
+    } catch (err) {
+      alert('Login request failed');
     }
   };
 
